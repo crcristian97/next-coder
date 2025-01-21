@@ -1,7 +1,8 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
 
 const getPosts = async () => {
-    const res = await fetch('https://fastapiproject-1-eziw.onrender.com/blue', 
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts', 
         {
            // cache: 'force-cache' // basada en tiempo
             cache: 'no-store', // basada en peticion
@@ -17,18 +18,37 @@ const getPosts = async () => {
     return res.json();
 }
 
+export const generateStaticParams = async () => {
+    return[
+        {
+            userI: 1,
+            id: 1,
+        },
+        {
+            userI: 1,
+            id: 2,
+        }   
+    ] 
+};
+
+
 const Posts =  async () => {
     const data = await getPosts();
-    console.log(data);
     return (
-        <div>
-            <h1>Posts</h1>
+        <Suspense fallback={<div>Loading...</div>}>
+            <div>
+                <h1>Posts</h1>
                 <ul>
-                    <li>Currency: {data.currency}</li>
-                    <li>Compra: {data.compra}</li>
-                    <li>Venta: {data.venta}</li>
+                    {data.map((post) => (
+                        <li key={post.id}>
+                            <Link href={`/posts/${post.id}`} className="text-blue-500 hover:underline">
+                                {post.title}
+                            </Link>
+                        </li>
+                    ))}
                 </ul>
-        </div>
+            </div>
+        </Suspense>
     )
 }
 
