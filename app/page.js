@@ -1,6 +1,6 @@
 import Navbar from "./componets/layouts/navbar/navbar";
 import Footer from "./componets/layouts/footer/footer";
-import app from "./context/firebaseConfig";
+import  app  from "./context/firebaseConfig";
 
 //De forma estatica
 export const metadata = {
