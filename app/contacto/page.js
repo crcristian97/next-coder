@@ -1,36 +1,28 @@
 'use client'
-import { useState } from "react";
+import { useContext } from "react";
 import { useRouter } from "next/navigation";
-
+import { AuthContext } from "../context/AuthContext";
+import Image from "next/image";
 export default function Contacto() {
-    const [form, setForm] = useState({
-        name: '',
-        email: '',
-        message: ''
-    });
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const name = e.target.name.value;
-        const email = e.target.email.value;
-        const message = e.target.message.value;
-        const response = await fetch(`http://localhost:3000/api/contact`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            cache: 'no-store',
-            body: JSON.stringify({ name, email, message })
-        });
-        const data = await response.json();
-        console.log(data);
-    }
-
+    const { registerUser, googleLogIn } = useContext(AuthContext);
     const router = useRouter();
+    
+
+    const submitForm = (e) => {
+        e.preventDefault();
+        const values = {
+            email: e.target.email.value,
+            password: e.target.password.value
+        }
+        registerUser(values);
+        router.push('/');
+    }
+    
+
     return (
         <main className="p-6 max-w-md mx-auto">
             <h1 className="text-3xl font-bold mb-4 text-center">Contacto</h1>
-            <form className="space-y-4" onSubmit={handleSubmit}>
+            <form className="space-y-4" onSubmit={submitForm}>
                 <div>
                     <label htmlFor="name" className="block text-lg font-medium">Nombre:</label>
                     <input type="text" id="name" name="name" required className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black" />
@@ -40,8 +32,8 @@ export default function Contacto() {
                     <input type="email" id="email" name="email" required className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black" />
                 </div>
                 <div>
-                    <label htmlFor="message" className="block text-lg font-medium">Mensaje:</label>
-                    <textarea id="message" name="message" required className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black" />
+                    <label htmlFor="password" className="block text-lg font-medium">Contraseña:</label>
+                    <input type="password" id="password" name="password" required className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black" />
                 </div>
                 <button 
                     type="submit" 
@@ -50,6 +42,7 @@ export default function Contacto() {
                 >
                     Enviar
                 </button>
+               
                 <button 
                     onClick={() => router.back()}
                     className="mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded"
@@ -58,6 +51,24 @@ export default function Contacto() {
                     Volver
                 </button>
             </form>
+            <div className="flex items-center p-2 rounded-md mt-4">
+            
+                <Image 
+                    src="/imgoogle.png" 
+                    alt="Google" 
+                    width={100} 
+                    height={100} 
+                    className="object-contain"
+                />
+                <button 
+                    onClick={googleLogIn}
+                    className=" ml-4 text-white font-bold py-2 px-4 rounded"
+                    aria-label="Ingresar con Google"
+                >
+                
+                     Google
+                </button>
+            </div>
         </main>
     );
 }

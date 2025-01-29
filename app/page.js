@@ -1,8 +1,8 @@
 import Navbar from "./componets/layouts/navbar/navbar";
 import Footer from "./componets/layouts/footer/footer";
-import  app  from "./context/firebaseConfig";
 
 //De forma estatica
+
 export const metadata = {
   title: "Ecommerce | Home",
   description: "Ecommerce para empresa de ropa Zara",
@@ -52,7 +52,7 @@ export async function generateMetadata( {params, searchParams }, parent) {
 
 
 export default function Home() {
-  console.log(app);
+  
   return (
     <>
       <Navbar />
