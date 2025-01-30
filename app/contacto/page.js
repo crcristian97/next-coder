@@ -52,9 +52,7 @@ export default function Contacto() {
                 </button>
             </form>
             <div className="flex items-center p-2 rounded-md mt-4">
-            
-               
-               
+
                 <Image 
                     src="/imgoogle.png" 
                     alt="Google" 
