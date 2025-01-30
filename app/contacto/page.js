@@ -53,17 +53,8 @@ export default function Contacto() {
             </form>
             <div className="flex items-center p-2 rounded-md mt-4">
             
-                <Image 
-                    src={imgoogle.png}
-                    alt="Google" 
-                   // width={100} 
-                   // height={100} 
-                    className="object-contain"
-                    blurDataURL="Cargando..."
-                    loading="lazy"
-                    placeholder="blur"
-                />
-               {/*
+               
+               
                 <Image 
                     src="/imgoogle.png" 
                     alt="Google" 
@@ -71,7 +62,6 @@ export default function Contacto() {
                     height={100} 
                     className="object-contain"
                 />
-                 */}
                 <button 
                     onClick={googleLogIn}
                     className=" ml-4 text-white font-bold py-2 px-4 rounded"
