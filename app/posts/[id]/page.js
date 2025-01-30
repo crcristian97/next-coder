@@ -6,8 +6,8 @@ const getPostsId = async (postId = '') => {
     }
     return res.json();
 };
-
-export async function getStaticProps({ params }) {
+ /*
+    export async function getStaticProps({ params }) {
     const post = await getPostsId(params.id);
     return {
         props: {
@@ -16,6 +16,7 @@ export async function getStaticProps({ params }) {
         revalidate: 60,  
     };
 }
+*/
 
 export async function getStaticPaths() {
     const posts = await fetch('https://jsonplaceholder.typicode.com/posts');
